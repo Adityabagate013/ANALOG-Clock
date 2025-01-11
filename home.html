@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnalogClock</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        body{
+            font-family: 'Arvo', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #111111;
+        }
+        
+        .heading{
+            position: relative;
+            color: #FFFF;
+
+        }
+        .clock{
+            width: 450px;
+            height: 450px;
+            background-image: url(img/clock.png);
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .clock::before{
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 9999;
+        }
+         .clock.hour,
+         .clock .min,
+         .clock .sec{
+            position: absolute;
+         }
+
+         .clock .hour,
+         .hr{
+            width: 160px;
+            height: 160px;
+         }
+         .clock .min,
+         .mn{
+            width: 190px;
+            height: 190px;
+         } 
+
+         .clock .sec,
+         .sc{
+            width: 230px;
+            height: 230px;
+         }
+
+        .hr,
+        .mn,
+        .sc{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+        }
+        .hr::before{
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 80px;
+            background: #494c97;
+            border-radius:6px 6px 0 0;
+            z-index: 10px;
+        }
+
+        .mn::before{
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 90px;
+            background: #feff00;
+            border: radius 6px 6px 0 0;
+            z-index: 11px;
+        }
+
+        .sc::before{
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 150px;
+            background: #fff;
+            border: radius 6px 6px 0 0;
+            z-index: 12px;
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+   <h2 class="heading">Clock</h2>
+   <div class="clock">
+    <div class="hour">
+        <div class="hr" id="hr"></div>
+    </div>
+
+    <div class="min">
+        <div class="mn" id="mn"></div>
+    </div>
+
+    <div class="sec">
+        <div class="sc" id="sc"></div>
+    </div>
+   </div>
+<script>
+        const hr = document.querySelector('#hr');
+        const mn = document.querySelector('#mn');
+        const sc = document.querySelector('#sc');
+        
+
+        const deg = 6;
+        setInterval(() => {
+           let day = new Date();
+           let hh = day.getHours() * 30;
+           let ms = day.getMilliseconds() * deg;
+           let mm = day.getMinutes() * deg;
+           let ss = day.getSeconds() * deg + ms / 1000;
+
+           hr.style.transform = `rotateZ(${hh}deg)`;
+           mn.style.transform = `rotateZ(${mm}deg)`;
+           sc.style.transform = `rotateZ(${ss}deg)`;
+           
+                    })
+</script>
+</body>
+</html>
